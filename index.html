@@ -12,7 +12,8 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #F8F9FA;
+            background-color: #f9f7fb;
+            background-image: linear-gradient(135deg, #f9f7fb 0%, #ede8f5 100%);
             color: #333333;
         }
         .chart-container {
@@ -29,35 +30,73 @@
                 height: 350px;
             }
         }
+        .interactive-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(242, 75, 136, 0.4));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 15px rgba(242, 75, 136, 0.8));
+            }
+        }
+        .pulse-animation {
+            animation: pulse 2.5s infinite;
+        }
     </style>
 </head>
-<body>
-    <div class="absolute top-4 left-4 sm:left-6 md:left-8 text-xs sm:text-sm text-gray-600 font-semibold z-10">
+<body class="overflow-x-hidden">
+    <div class="absolute top-4 left-4 sm:left-6 md:left-8 text-sm sm:text-base text-gray-600 font-semibold z-10">
         <p>Rumah Sakit Umum Daerah Abdul Aziz, Singkawang</p>
     </div>
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8">
 
-        <header class="text-center my-8 md:my-12">
+        <header class="text-center my-8 md:my-12 animate-on-scroll">
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#772D8B] mb-2">WASPADA KANKER PARU</h1>
             <p class="text-lg md:text-xl text-[#F26157] font-semibold">Kenali Gejalanya, Cegah Risikonya!</p>
         </header>
 
         <main class="space-y-8">
 
-            <section class="bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center gap-6">
+            <section class="bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center gap-6 interactive-card animate-on-scroll">
                 <div class="md:w-2/3 text-center md:text-left">
                     <h2 class="text-2xl font-bold text-[#772D8B] mb-3">Apa Itu Kanker Paru?</h2>
                     <p class="text-base leading-relaxed">Kanker paru adalah pertumbuhan sel abnormal yang tidak terkendali di dalam paru-paru. Penyakit ini merupakan salah satu penyebab utama kematian akibat kanker di seluruh dunia, menjadikannya ancaman serius bagi kesehatan masyarakat.</p>
                 </div>
-                <div class="md:w-1/3 flex-shrink-0 text-center">
+                <div class="md:w-1/3 flex-shrink-0 text-center pulse-animation rounded-full">
                     <div class="text-7xl md:text-8xl font-bold text-[#F24B88]">9/10</div>
                     <p class="font-semibold text-gray-600 mt-1">Kasus Kanker Paru Disebabkan oleh Merokok</p>
                 </div>
             </section>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <section class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <section class="lg:col-span-2 bg-white rounded-lg shadow-md p-6 interactive-card animate-on-scroll">
                     <h2 class="text-2xl font-bold text-center text-[#772D8B] mb-2">Faktor Risiko Utama</h2>
                     <p class="text-center text-gray-600 mb-6">Meskipun merokok adalah penyebab utama, beberapa faktor lain juga dapat meningkatkan risiko Anda. Grafik di bawah ini membandingkan beberapa faktor risiko yang paling umum.</p>
                     <div class="chart-container">
@@ -65,20 +104,20 @@
                     </div>
                 </section>
 
-                <section class="bg-white rounded-lg shadow-md p-6">
+                <section class="bg-white rounded-lg shadow-md p-6 interactive-card animate-on-scroll">
                     <h2 class="text-2xl font-bold text-center text-[#772D8B] mb-2">Pencegahan Adalah Kunci</h2>
-                    <p class="text-center text-gray-600 mb-6">Mengambil langkah-langkah proaktif dapat secara signifikan mengurangi risiko Anda terkena kanker paru.</p>
+                    <p class="text-center text-gray-600 mb-6">Mengambil langkah-langkah proaktif dapat secara signifikan mengurangi risiko Anda.</p>
                     <ul class="space-y-4 text-base">
-                        <li class="flex items-center"><span class="text-3xl mr-4">🚭</span> <span class="font-semibold">Berhenti Merokok</span></li>
-                        <li class="flex items-center"><span class="text-3xl mr-4">💨</span> <span class="font-semibold">Hindari Asap Rokok (Perokok Pasif)</span></li>
-                        <li class="flex items-center"><span class="text-3xl mr-4">😷</span> <span class="font-semibold">Gunakan Pelindung di Lingkungan Berisiko</span></li>
-                        <li class="flex items-center"><span class="text-3xl mr-4">🥦</span> <span class="font-semibold">Terapkan Pola Makan Sehat & Seimbang</span></li>
-                        <li class="flex items-center"><span class="text-3xl mr-4">🏃</span> <span class="font-semibold">Rutin Berolahraga</span></li>
+                        <li class="flex items-center"><div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full text-3xl mr-4">🚭</div> <span class="font-semibold">Berhenti Merokok</span></li>
+                        <li class="flex items-center"><div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full text-3xl mr-4">💨</div> <span class="font-semibold">Hindari Asap Rokok (Perokok Pasif)</span></li>
+                        <li class="flex items-center"><div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full text-3xl mr-4">😷</div> <span class="font-semibold">Gunakan Pelindung di Lingkungan Berisiko</span></li>
+                        <li class="flex items-center"><div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full text-3xl mr-4">🥦</div> <span class="font-semibold">Terapkan Pola Makan Sehat & Seimbang</span></li>
+                        <li class="flex items-center"><div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full text-3xl mr-4">🏃</div> <span class="font-semibold">Rutin Berolahraga</span></li>
                     </ul>
                 </section>
             </div>
             
-            <section class="bg-white rounded-lg shadow-md p-6">
+            <section class="bg-white rounded-lg shadow-md p-6 interactive-card animate-on-scroll">
                 <h2 class="text-2xl font-bold text-center text-[#772D8B] mb-2">Kenali Gejalanya!</h2>
                 <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Kanker paru seringkali tidak menunjukkan gejala pada tahap awal. Namun, waspadai tanda-tanda berikut. Jika Anda mengalami beberapa gejala ini secara terus-menerus, jangan ragu untuk berkonsultasi dengan dokter.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
@@ -93,8 +132,8 @@
                         </ul>
                     </div>
 
-                    <div class="text-4xl text-[#772D8B] font-bold hidden md:block mt-12">→</div>
-                    <div class="text-4xl text-[#772D8B] font-bold md:hidden">↓</div>
+                    <div class="text-4xl text-[#772D8B] font-bold hidden md:block mt-12 transform -translate-y-4">›</div>
+                    <div class="text-4xl text-[#772D8B] font-bold md:hidden transform rotate-90">›</div>
 
                     <div class="text-center w-full sm:w-2/3 md:w-1/3">
                         <h3 class="text-xl font-bold text-[#F28F38] mb-3">Gejala Umum</h3>
@@ -106,10 +145,10 @@
                         </ul>
                     </div>
                     
-                    <div class="text-4xl text-[#772D8B] font-bold hidden md:block mt-12">→</div>
-                    <div class="text-4xl text-[#772D8B] font-bold md:hidden">↓</div>
+                    <div class="text-4xl text-[#772D8B] font-bold hidden md:block mt-12 transform -translate-y-4">›</div>
+                    <div class="text-4xl text-[#772D8B] font-bold md:hidden transform rotate-90">›</div>
 
-                    <div class="text-center p-4 bg-[#00A6A6] text-white rounded-lg w-full sm:w-2/3 md:w-1/3">
+                    <div class="text-center p-4 bg-gradient-to-br from-[#00A6A6] to-[#008f8f] text-white rounded-lg w-full sm:w-2/3 md:w-1/3 shadow-lg">
                         <h3 class="text-xl font-bold mb-2">Tindakan</h3>
                         <p class="font-bold">Segera Konsultasikan dengan Dokter!</p>
                         <p class="text-sm mt-2">Deteksi dini secara signifikan meningkatkan peluang keberhasilan pengobatan.</p>
@@ -120,7 +159,7 @@
 
         </main>
 
-        <footer class="text-center mt-12 bg-[#772D8B] text-white rounded-lg shadow-md p-8">
+        <footer class="text-center mt-12 bg-gradient-to-r from-[#772D8B] to-[#5c236e] text-white rounded-lg shadow-md p-8 animate-on-scroll">
             <h2 class="text-3xl font-bold mb-2">JANGAN TUNGGU PARAH!</h2>
             <p class="max-w-2xl mx-auto">Jika Anda memiliki gejala atau faktor risiko tinggi, deteksi dini adalah langkah terbaik. Hubungi layanan kesehatan untuk informasi lebih lanjut.</p>
             <div class="mt-4">
@@ -128,12 +167,12 @@
             </div>
             <div class="mt-8 border-t border-purple-400 pt-6 text-sm">
                 <h4 class="font-bold text-base mb-4">Coass Pulmonologi</h4>
-                <div class="flex flex-wrap justify-center gap-3 text-purple-900">
-                    <div class="bg-white/90 rounded-md py-1 px-3 font-semibold">Yoga Tri Arya Dinata</div>
-                    <div class="bg-white/90 rounded-md py-1 px-3 font-semibold">Alfian Piero Kandiwak</div>
-                    <div class="bg-white/90 rounded-md py-1 px-3 font-semibold">Fuady Farid Albari</div>
-                    <div class="bg-white/90 rounded-md py-1 px-3 font-semibold">Fatmawati</div>
-                    <div class="bg-white/90 rounded-md py-1 px-3 font-semibold">Erik Brillian Destanta</div>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <div class="glass-card">Yoga Tri Arya Dinata</div>
+                    <div class="glass-card">Alfian Piero Kandiwak</div>
+                    <div class="glass-card">Fuady Farid Albari</div>
+                    <div class="glass-card">Fatmawati</div>
+                    <div class="glass-card">Erik Brillian Destanta</div>
                 </div>
             </div>
         </footer>
@@ -187,6 +226,10 @@
             type: 'bar',
             data: riskData,
             options: {
+                animation: {
+                    duration: 1500,
+                    easing: 'easeInOutQuart'
+                },
                 indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
@@ -216,10 +259,25 @@
         };
 
         new Chart(ctx, riskConfig);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                animatedElements.forEach(el => observer.observe(el));
+            } else {
+                animatedElements.forEach(el => el.classList.add('is-visible'));
+            }
+        });
     </script>
 </body>
 </html>
-
-
 
 
